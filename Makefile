@@ -1,21 +1,32 @@
+
 NAME = philo
 
-SRCS	=	$(ALL)
+# *********************** SRCS ************************************************ #
 
-# *********************** ALL ************************************************ #
+SRCS_DIR		= 	./
+SOURSEC_FILES	= 	philo_mandatory_main.c\
+					philo_mandatory_libft.c
 
-ALL_DIR 	= 	./
-ALL		= 	$(ALL_DIR)philo_mandatory_main.c \
-			$(ALL_DIR)philo_mandatory_libft.c
+SRCS			= $(addprefix $(SRCS_DIR)/, $(SOURSEC_FILES))
 
 # *********************** HDRS ************************************************ #
 
-INCLD 	= 	./
-HDRS	=	$(INCLD)philo_mandatory.h\
+INCLD_DIR 		= 	./
+HEADERES		=	$(INCLD_DIR)philo_mandatory.h\
 
-# *********************** LIBFT *********************************************** #
+INCS			= $(addprefix $(INCLD_DIR)/, $(HEADERES))
 
-OBJ		=	$(SRCS:.c=.o)
+# *********************** OBJ ************************************************* #
+
+OBJS_DIR		= ./objects
+
+OBJS			= $(addprefix $(OBJS_DIR)/, $(SOURSEC_FILES:.c=.o))
+
+$(OBJS_DIR)/%.o: 	$(SRCS_DIR)/%.c $(INCS) Makefile
+					@mkdir -p ${@D}
+					$(CC) $(CFLAGS) -c $< -o $@
+
+# ***************************************************************************** #
 
 CC		=	gcc
 
@@ -23,13 +34,11 @@ CFLAGS	=	-Wall -Wextra -Werror -g
 
 all:		$(NAME)
 
-$(NAME):	$(OBJ)
-			$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
-.c.o:
-			@$(CC) $(CFLAGS) -I$(INCLD) -c $< -o $(<:.c=.o)
+$(NAME):	$(OBJS)
+			$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 clean:
-			@rm -rf $(OBJ)
+			rm -rf $(OBJS_DIR)
 
 fclean:		clean
 			@rm -rf $(NAME)
