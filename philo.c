@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_mandatory.h                                  :+:      :+:    :+:   */
+/*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhatches <bhatches@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/09 17:14:17 by bhatches          #+#    #+#             */
-/*   Updated: 2021/08/13 15:34:50 by bhatches         ###   ########.fr       */
+/*   Created: 2021/08/09 17:14:15 by bhatches          #+#    #+#             */
+/*   Updated: 2021/08/19 23:44:52 by bhatches         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_MANDATARY_H
-# define PHILO_MANDATARY_H
+#include "philo.h"
 
-#define ERROR 1
+int	main(int argc, char **argv)
+{
+	t_prsng_strct	prsngStrct;
+	t_main_strct	mainStrct;
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <pthread.h>
-# include <sys/time.h>
-
-int	ft_atoi(const char *str);
-
-#endif
+	if (prsng_vldtn(argc, argv, &prsngStrct) == ERROR)
+		return (ERROR);
+	if (init_main_strct(&prsngStrct, &mainStrct) == ERROR)
+		return (ERROR);
+	if (create_threads(&mainStrct, prsngStrct.nb_philo) == ERROR)
+		return (ERROR);
+	free_resources(&mainStrct, prsngStrct.nb_philo);
+	return (0);
+}

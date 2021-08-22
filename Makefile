@@ -4,15 +4,21 @@ NAME = philo
 # *********************** SRCS ************************************************ #
 
 SRCS_DIR		= 	./
-SOURSEC_FILES	= 	philo_mandatory_main.c\
-					philo_mandatory_libft.c
+SOURSEC_FILES	= 	philo.c\
+					philo_1_prsng_vldtn.c\
+					philo_1_prsng_atoi.c\
+					philo_1_vldtn_isdigits.c\
+					philo_2_init.c\
+					philo_3_time.c\
+					philo_4_threads.c\
+					philo_5_free.c\
 
 SRCS			= $(addprefix $(SRCS_DIR)/, $(SOURSEC_FILES))
 
 # *********************** HDRS ************************************************ #
 
 INCLD_DIR 		= 	./
-HEADERES		=	$(INCLD_DIR)philo_mandatory.h\
+HEADERES		=	$(INCLD_DIR)philo.h\
 
 INCS			= $(addprefix $(INCLD_DIR)/, $(HEADERES))
 
